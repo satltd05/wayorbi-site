@@ -44,23 +44,22 @@ export default function TravelerPage({ id }: { id: string }) {
           </span>
         </div>
         <div className="container-wide relative">
-          <div className="-mt-14 flex flex-col gap-6 sm:-mt-16 sm:flex-row sm:items-end sm:justify-between">
-            <div className="flex items-end gap-5">
-              <TravelerAvatar traveler={traveler} size="xl" className="ring-[6px] ring-mist" />
-              <div className="pb-1">
-                <p>
-                  <DemoTag>Profil fictif</DemoTag>
-                </p>
-                <h1 className="mt-1 font-display text-4xl font-semibold text-ink sm:text-5xl">{traveler.name}</h1>
-                <p className="text-muted">{traveler.handle}</p>
-              </div>
-            </div>
-            <div className="flex flex-wrap items-center gap-2 pb-1">
+          <div className="-mt-12 flex items-end justify-between gap-4 sm:-mt-14">
+            <TravelerAvatar traveler={traveler} size="xl" className="ring-[6px] ring-mist" />
+            <div className="flex flex-wrap items-center justify-end gap-2 pb-1">
               <FollowButton travelerId={traveler.id} name={traveler.name} />
               <button type="button" disabled className="btn-secondary cursor-not-allowed opacity-60" title="La messagerie arrivera avec l’application">
-                <MessageCircle size={16} aria-hidden="true" /> Message (bientôt)
+                <MessageCircle size={16} aria-hidden="true" /> <span className="hidden sm:inline">Message (bientôt)</span>
+                <span className="sr-only sm:hidden">Message, bientôt disponible</span>
               </button>
             </div>
+          </div>
+          <div className="mt-4">
+            <p>
+              <DemoTag>Profil fictif</DemoTag>
+            </p>
+            <h1 className="mt-1 font-display text-4xl font-semibold text-ink sm:text-5xl">{traveler.name}</h1>
+            <p className="text-muted">{traveler.handle}</p>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-12">
@@ -82,14 +81,14 @@ export default function TravelerPage({ id }: { id: string }) {
             </div>
             <dl className="grid grid-cols-2 gap-3 self-start lg:col-span-5">
               {[
-                [plural(stats.carnets, 'carnet', 'carnets'), 'publiés'],
-                [plural(stats.countries, 'pays', 'pays'), 'racontés'],
-                [plural(stats.days, 'jour', 'jours'), 'de voyage'],
-                [plural(stats.tips, 'conseil', 'conseils'), 'partagés'],
-              ].map(([value, label]) => (
+                ['Carnets publiés', stats.carnets],
+                ['Pays racontés', stats.countries],
+                ['Jours de voyage', stats.days],
+                ['Conseils partagés', stats.tips],
+              ].map(([label, value]) => (
                 <div key={label} className="rounded-2xl border border-line bg-white p-4">
                   <dt className="text-xs text-muted">{label}</dt>
-                  <dd className="mt-1 font-display text-2xl font-semibold text-ink">{value}</dd>
+                  <dd className="mt-1 font-display text-3xl font-semibold text-ink">{value}</dd>
                 </div>
               ))}
             </dl>

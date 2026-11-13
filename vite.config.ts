@@ -1,8 +1,8 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig, loadEnv, type Plugin } from 'vite';
-import { CARNETS } from './src/data/carnets';
-import { TRAVELERS } from './src/data/travelers';
+import { CARNETS } from './src/data/carnets.ts';
+import { TRAVELERS } from './src/data/travelers.ts';
 
 const STATIC_ROUTES = ['/', '/concept', '/carnets', '/explorer', '/communaute', '/travel-dna', '/atelier', '/fonctionnalites', '/beta', '/faq', '/credits', '/mentions-legales', '/confidentialite'];
 

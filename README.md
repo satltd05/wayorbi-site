@@ -1,62 +1,91 @@
-# Wayorbi — site vitrine interactif (version multipage)
+# Wayorbi — site de présentation
 
-Refonte du site de présentation de Wayorbi, conçue à partir du projet original fourni.
+Site multipage qui présente **Wayorbi**, un projet de réseau social consacré aux carnets de voyage. Les visiteurs y trouvent le concept, des carnets d’exemple complets, des profils de voyageurs et des démonstrations interactives.
 
-## Parcourir les pages
+> **Ce site est une démonstration.** Les carnets, voyageurs, budgets, commentaires et stories sont **fictifs**. Les interactions (suivre, aimer, commenter, enregistrer, Travel DNA, brouillon de l’atelier) fonctionnent vraiment, mais elles sont enregistrées **uniquement dans le navigateur du visiteur** (`localStorage`). Il n’y a ni compte, ni serveur, ni publication.
+
+## Pages
 
 | Adresse | Contenu |
 | --- | --- |
-| `/` | Accueil immersif, vidéo originale du logo, démonstrations, invitation à participer |
-| `/concept` | Vision, promesse et moments du voyage |
-| `/carnets` | Exemple de carnet interactif et explication de la création en deux étapes |
-| `/atelier` | Atelier guidé pour rédiger un brouillon **local** et exporter les données JSON |
-| `/explorer` | Recherche et filtres d'itinéraires, budgets et conseils illustratifs |
-| `/communaute` | Exemples de profils, stories et choix public/privé simulés |
-| `/travel-dna` | Quiz interactif et propositions d'inspiration calculées localement |
-| `/fonctionnalites` | Panorama détaillé des fonctionnalités prévues pour Wayorbi |
-| `/beta` | Fonctionnement du test guidé et lien vers la maquette publique |
-| `/faq` | Réponses sur le projet, le stade de développement et les données |
-| `/credits` | Crédits des photos de voyage : lieu, auteur, licence et source de chaque image |
+| `/` | Accueil : vidéo du logo, fil façon réseau social (stories, carnets, suggestions), carnet interactif, estimation de budget |
+| `/concept` | Le constat, la réponse de Wayorbi, le parcours avant/pendant/après, les piliers |
+| `/carnets` | Les 9 carnets d’exemple, filtrables par type, et la création en deux étapes |
+| `/carnets/:id` | Un carnet complet : carte de l’itinéraire, étapes, photos, transports, activités, adresses, conseils, budget en 5 catégories, commentaires |
+| `/explorer` | Recherche et filtres (destination, budget, durée, type, transport, envie), tri selon le Travel DNA ; filtres conservés dans l’adresse |
+| `/communaute` | Voyageurs, stories, aperçu de la messagerie, profil public ou privé |
+| `/voyageurs/:id` | Profil d’un voyageur fictif : stories à la une, carnets, conseils, activité |
+| `/travel-dna` | 8 critères, suggestions de carnets et de voyageurs expliquées, calcul transparent |
+| `/atelier` | Création d’un carnet en deux étapes, brouillon local, aperçu, export JSON |
+| `/mon-espace` | Tout ce que le visiteur a gardé pendant sa visite, effaçable |
+| `/fonctionnalites` | Ce qui a une démo sur ce site et ce qui est prévu pour l’application |
+| `/beta` | Bêta-test de la maquette ; bascule automatiquement en « terminé » après le 1er décembre 2026 |
+| `/faq`, `/credits`, `/mentions-legales`, `/confidentialite` | Informations |
 
-## Exécuter localement
+## Lancer le site sur son ordinateur
 
-**Prérequis : Node.js 22 ou compatible avec Vite 8, npm.**
+Prérequis : Node.js 20.19 ou plus récent, et npm.
 
 ```bash
 npm install
-npm run dev
+npm run dev      # http://localhost:3000
 ```
 
-Ouvrir `http://localhost:3000`. Pour préparer une version statique :
+Le serveur de développement et la prévisualisation (`npm run preview`) n’écoutent que sur **cet ordinateur** (`localhost`) : ils ne sont pas accessibles depuis le réseau.
+
+Avant de publier :
 
 ```bash
-npm run lint
-npm run build
+npm run check    # vérification TypeScript (mode strict) + compilation dans dist/
 ```
 
-Déployer le contenu de `dist/` sur un hébergement permettant la redirection des routes SPA vers `index.html`. La redirection client repose sur History API.
+## Organisation du code
 
-## Principes du projet
+```
+src/
+  config/site.ts        contact, dates du bêta-test, informations légales à compléter
+  data/carnets.ts       les 9 carnets d'exemple (étapes, budgets, adresses, conseils)
+  data/travelers.ts     les 5 voyageurs fictifs (stories, stories à la une)
+  data/travelPhotos.ts  les 80 photos et leurs crédits (auteur, licence, source)
+  lib/                  calculs (budgets, carte, recherche), Travel DNA, données de démo, routeur
+  components/           éléments réutilisables (cartes, carte d'itinéraire, stories, boutons…)
+  pages/                une page par fichier, chargée à la demande
+  styles/fonts.css      polices hébergées dans le projet (Fraunces, Inter)
+public/
+  photos/  fonts/  media/logo-wayorbi-anime.mp4  og-image.jpg  _redirects  _headers
+docs/                   cahier des charges et documents de travail
+```
 
-- Identité originale Wayorbi conservée : bleu, cyan, violet, vidéo animée dans `public/assets/aistudio/`.
-- Pages responsive, navigation interne, pause de la vidéo, prise en compte de la réduction des animations, lien d'évitement.
-- Les profils, histoires et voyages d'exemple sont **fictifs**.
-- Les 51 photos des carnets d'exemple et des fiches Explorer viennent de **Wikimedia Commons** (licences Creative Commons ou domaine public). Elles sont stockées dans `public/photos/`. Leur auteur, leur licence et leur source sont dans `src/data/travelPhotos.ts`, affichés sur chaque photo et sur la page `/credits`. Toute nouvelle photo doit y être ajoutée avec son crédit.
-- Le **Travel DNA** est une simulation de règles locales, **pas une IA** ou un algorithme de production.
-- L'**atelier carnet** sauvegarde automatiquement le brouillon dans `localStorage` **uniquement sur l'appareil**. Il permet un export JSON, une remise à zéro, mais pas de publication, d'authentification ou de médias.
-- Le formulaire de contact prépare un **e-mail à envoyer par l'utilisateur** et n'affirme plus enregistrer une inscription sans service de collecte.
-- Le site vitrine ne constitue **pas** une application sociale avec backend, comptes, notifications réelles ou messagerie.
-- La page bêta pointe vers `https://wayorbi-concept-test.pages.dev/` et rappelle la fin de la période de test annoncée : 1er décembre 2026.
+### Modifier le contenu
 
-## Prochaines étapes avant une vraie application
+- **Un carnet** : `src/data/carnets.ts`. Les totaux, la carte et les filtres se recalculent tout seuls. Une photo inconnue est signalée dès la vérification TypeScript.
+- **Une photo** : déposer le fichier dans `public/photos/` puis ajouter son entrée dans `src/data/travelPhotos.ts` **avec l’auteur, la licence et la source**. Elle apparaîtra automatiquement sur la page Crédits.
+- **Les dates du bêta-test** : `BETA` dans `src/config/site.ts`. La page Bêta, le menu, l’accueil, le pied de page et la FAQ changent seuls à la date de fin.
 
-1. Concevoir/valider les écrans et le design system, puis tester les pages sur mobile.
-2. Concevoir une authentification et les autorisations, dont la visibilité public/privé.
-3. Définir un modèle de données pour comptes, carnets, étapes, expériences, photos/vidéos, budgets, stories, suivis, favoris, discussions et notifications.
-4. Intégrer un backend (Supabase, ou équivalent), la gestion des fichiers, des règles RLS et des sauvegardes.
-5. Prévoir la gestion de consentement et de confidentialité, la modération, la suppression des contenus et la conformité RGPD avant ouverture réelle.
-6. Ajouter des tests unitaires, tests de parcours E2E, vérifications accessibilité et monitoring.
+## Publier le site
 
-## Vérification
+1. **Compléter les mentions légales** : remplir `LEGAL` dans `src/config/site.ts` (éditeur, statut, adresse, directeur de la publication, hébergeur). Tant qu’un champ est vide, la page affiche « À compléter ».
+2. **Choisir l’adresse publique** et la déclarer dans la variable `SITE_URL` (voir `.env.example`) : elle complète l’image d’aperçu des liens partagés et génère `sitemap.xml`.
+3. **Relire le dossier `docs/`** : il contient des documents de travail ; les retirer du dépôt s’il devient public.
+4. **Déposer le code sur GitHub** :
+   ```bash
+   git remote add origin https://github.com/<compte>/<depot>.git
+   git push -u origin main
+   ```
+5. **Héberger** (Cloudflare Pages, comme la maquette du bêta-test, ou Netlify) :
+   - commande de compilation : `npm run build`
+   - dossier publié : `dist`
+   - variable d’environnement : `SITE_URL`
 
-La syntaxe TypeScript/TSX a été analysée. Le build Vite complet **n'a pas pu être exécuté ici**, faute d'accès aux dépendances npm dans l'environnement de génération. Lancer `npm install && npm run lint && npm run build` avant publication.
+   `public/_redirects` renvoie toutes les adresses vers l’application (nécessaire pour `/carnets/japon`, etc.) et `public/_headers` ajoute des en-têtes de sécurité et de cache.
+
+## Principes à respecter
+
+- Ne jamais présenter une démonstration comme une fonctionnalité disponible ; ne pas inventer de chiffres, de témoignages, de partenariats ou de services opérationnels.
+- Garder la vidéo du logo et l’identité bleu, cyan et violet.
+- Créditer chaque photo ; n’utiliser aucune photo de visage pour les profils fictifs.
+- Ne rien enregistrer côté serveur sans politique de confidentialité à jour.
+
+## Vers l’application
+
+Ce site ne remplace pas l’application. Pour un réseau social réel, il faudra notamment : authentification et profils, base de données (carnets, étapes, médias, budgets, abonnements), stockage des photos et vidéos, règles de visibilité public/privé, modération, notifications, messagerie, conformité RGPD et tests de bout en bout.

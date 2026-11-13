@@ -6,6 +6,7 @@ import { plural } from '../lib/format';
 import { SiteLink } from './SiteLink';
 import TravelerAvatar from './TravelerAvatar';
 import { FollowButton } from './InteractionButtons';
+import { photoCredit } from './TravelPhotoFrame';
 
 /** Carte d'un voyageur fictif : bannière photo, avatar, style de voyage, bouton suivre. */
 export default function TravelerCard({ traveler, compact = false }: { traveler: Traveler; compact?: boolean }) {
@@ -32,6 +33,7 @@ export default function TravelerCard({ traveler, compact = false }: { traveler: 
       <div className="relative h-28">
         <img src={banner.src} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
         <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+        <span className="absolute right-3 top-2 text-[9px] text-white/90 [text-shadow:0_1px_2px_rgba(0,0,0,.6)]">{photoCredit(banner)}</span>
       </div>
       <div className="relative px-5 pb-5">
         <div className="-mt-8 flex items-end justify-between gap-3">

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import { ArrowDown, Pause, Play } from 'lucide-react';
 
-const LOGO_VIDEO_SRC = '/assets/aistudio/Animated_video_16.9_-_Satine_LIOTAUD_e4284202.mp4';
+const LOGO_VIDEO_SRC = '/media/logo-wayorbi-anime.mp4';
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);

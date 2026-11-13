@@ -1,6 +1,0 @@
-{
-  "name": "Wayorbi",
-  "description": "Réseau social dédié au voyage : carnets interactifs, itinéraires, budgets réels et conseils entre voyageurs.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

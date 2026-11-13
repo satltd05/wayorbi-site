@@ -1,22 +1,17 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
-import {defineConfig} from 'vite';
+import { defineConfig } from 'vite';
 
-export default defineConfig(() => {
-  return {
-    plugins: [react(), tailwindcss()],
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, '.'),
-      },
-    },
-    server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modify—file watching is disabled to prevent flickering during agent edits.
-      hmr: process.env.DISABLE_HMR !== 'true',
-      // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
-      watch: process.env.DISABLE_HMR === 'true' ? null : {},
-    },
-  };
+// Sécurité : le serveur de développement et la prévisualisation n'écoutent que sur
+// cet ordinateur (localhost). Ils ne sont pas accessibles depuis le réseau local.
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+  server: {
+    host: 'localhost',
+    port: 3000,
+  },
+  preview: {
+    host: 'localhost',
+    port: 4173,
+  },
 });

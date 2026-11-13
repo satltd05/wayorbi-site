@@ -1,38 +1,42 @@
-import { Camera, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { PageHero, SectionHeading } from './Shared';
-import { CONCEPT_JOURNEYS, EXPLORER_ENTRIES } from '../data/wayorbiConceptData';
-import { EXPLORER_PHOTOS, getPhoto, JOURNEY_COVERS, STEP_PHOTOS, type TravelPhoto } from '../data/travelPhotos';
+import { CARNETS } from '../data/carnets';
+import { TRAVEL_PHOTOS, type TravelPhoto } from '../data/travelPhotos';
 import TravelPhotoFrame from '../components/TravelPhotoFrame';
+import { SiteLink } from '../components/SiteLink';
 
-const GROUPS: { title: string; photos: TravelPhoto[] }[] = [
-  ...CONCEPT_JOURNEYS.map((journey) => ({
-    title: `Carnet ${journey.country} · ${journey.title}`,
-    photos: [JOURNEY_COVERS[journey.id], ...journey.steps.flatMap((step) => STEP_PHOTOS[step.id] ?? [])]
-      .filter(Boolean)
-      .map(getPhoto),
-  })),
-  {
-    title: 'Explorer · Itinéraires, budgets et bons plans',
-    photos: EXPLORER_ENTRIES.flatMap((entry) => EXPLORER_PHOTOS[entry.id] ?? []).map(getPhoto),
-  },
-];
+/** Chaque photo du site, rangée sous le premier carnet qui l'utilise ; les autres sont regroupées à la fin. */
+function buildGroups() {
+  const used = new Set<string>();
+  const groups: { title: string; to?: string; photos: TravelPhoto[] }[] = CARNETS.map((carnet) => {
+    const ids = [carnet.cover, ...carnet.steps.flatMap((s) => [...s.photos, ...s.places.flatMap((p) => (p.photo ? [p.photo] : []))])];
+    const photos = [...new Set(ids)].filter((id) => !used.has(id)).map((id) => {
+      used.add(id);
+      return TRAVEL_PHOTOS.find((p) => p.id === id) as TravelPhoto;
+    });
+    return { title: `${carnet.country} · ${carnet.title}`, to: `/carnets/${carnet.id}`, photos };
+  });
+  const others = TRAVEL_PHOTOS.filter((p) => !used.has(p.id));
+  if (others.length) groups.push({ title: 'Autres illustrations du site', photos: [...others] });
+  return groups.filter((g) => g.photos.length > 0);
+}
 
 function CreditCard({ photo }: { photo: TravelPhoto }) {
   return (
-    <article className="rounded-[18px] overflow-hidden bg-white border border-[#E4E9F1] shadow-[0_1px_2px_rgba(17,24,39,0.04),0_6px_20px_rgba(17,24,39,0.06)]">
-      <TravelPhotoFrame photo={photo} showCredit={false} className="aspect-[16/10] w-full" />
-      <div className="p-4 space-y-1.5 text-sm">
-        <h3 className="font-semibold text-[#111827]">{photo.place}</h3>
-        <p className="text-[#4B5563]">Photo : {photo.author}</p>
+    <article className="overflow-hidden rounded-[var(--radius-card)] border border-line bg-white">
+      <TravelPhotoFrame photo={photo} credit="none" className="aspect-[16/10] w-full" />
+      <div className="space-y-1.5 p-4 text-sm">
+        <h3 className="font-sans font-semibold text-ink">{photo.place}</h3>
+        <p className="text-ink-soft">Photo : {photo.author}</p>
         <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
           {photo.licenseUrl ? (
-            <a href={photo.licenseUrl} target="_blank" rel="noreferrer" className="font-semibold text-[#5468DC] hover:underline">
+            <a href={photo.licenseUrl} target="_blank" rel="noreferrer" className="font-semibold text-sky hover:underline">
               {photo.license}
             </a>
           ) : (
-            <span className="font-semibold text-[#5468DC]">{photo.license}</span>
+            <span className="font-semibold text-sky">{photo.license}</span>
           )}
-          <a href={photo.sourceUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-[#4B5563] hover:text-[#111827]">
+          <a href={photo.sourceUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-ink-soft hover:text-ink">
             Source <ExternalLink size={12} aria-hidden="true" />
           </a>
         </p>
@@ -41,26 +45,42 @@ function CreditCard({ photo }: { photo: TravelPhoto }) {
   );
 }
 
-export function CreditsPage() {
-  const total = GROUPS.reduce((n, g) => n + g.photos.length, 0);
+export default function CreditsPage() {
+  const groups = buildGroups();
   return (
     <>
       <PageHero
-        eyebrow="Crédits photos"
-        title={<>Merci aux photographes <span className="gradient-text">qui font voyager.</span></>}
-        description={`Les ${total} photos qui illustrent les carnets d'exemple viennent de Wikimedia Commons. Elles sont publiées sous licence libre (Creative Commons ou domaine public), redimensionnées pour le web et recadrées à l'affichage.`}
-        icon={<Camera size={108} strokeWidth={1.2} />}
+        kicker="Crédits photos"
+        title="Merci aux photographes qui font voyager"
+        description={`Les ${TRAVEL_PHOTOS.length} photos de ce site viennent de Wikimedia Commons. Elles sont publiées sous licence libre (Creative Commons ou domaine public), redimensionnées pour le web et recadrées à l’affichage. Elles illustrent des carnets fictifs : elles n’ont pas été prises par les voyageurs présentés.`}
       />
-      {GROUPS.map((group, index) => (
-        <section key={group.title} className={`py-14 sm:py-16 ${index % 2 === 0 ? 'bg-white' : 'bg-[#F3F6FB]'}`}>
+      {groups.map((group, index) => (
+        <section key={group.title} className={`py-14 sm:py-16 ${index % 2 === 0 ? 'bg-white' : 'bg-mist'}`}>
           <div className="container-wide">
-            <SectionHeading eyebrow={`${group.photos.length} photos`} title={group.title} />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {group.photos.map((photo) => <CreditCard key={photo.id} photo={photo} />)}
+            <SectionHeading
+              kicker={`${group.photos.length} photo${group.photos.length > 1 ? 's' : ''}`}
+              title={group.title}
+              action={
+                group.to ? (
+                  <SiteLink to={group.to} className="btn-secondary">
+                    Voir le carnet
+                  </SiteLink>
+                ) : undefined
+              }
+            />
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {group.photos.map((photo) => (
+                <CreditCard key={photo.id} photo={photo} />
+              ))}
             </div>
           </div>
         </section>
       ))}
+      <section className="py-12">
+        <div className="container-text text-sm text-muted">
+          <p>Le logo et l’animation du logo appartiennent au projet Wayorbi. Les polices Fraunces et Inter sont distribuées sous licence SIL Open Font License 1.1. Les icônes proviennent de la bibliothèque Lucide (licence ISC).</p>
+        </div>
+      </section>
     </>
   );
 }

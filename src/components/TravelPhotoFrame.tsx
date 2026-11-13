@@ -1,4 +1,4 @@
-import type { TravelPhoto } from '../data/travelPhotos';
+import { getPhoto, type PhotoId, type TravelPhoto } from '../data/travelPhotos';
 
 /** Crédit court d'une photo : « © Auteur, Licence ». */
 export function photoCredit(photo: TravelPhoto) {
@@ -6,32 +6,50 @@ export function photoCredit(photo: TravelPhoto) {
 }
 
 type TravelPhotoFrameProps = {
-  photo: TravelPhoto;
+  photo: TravelPhoto | PhotoId;
   /** Classes du conteneur (taille, ratio, arrondi). */
   className?: string;
-  /** Affiche le lieu et le crédit en surimpression, comme sur la maquette Wayorbi. */
-  showCredit?: boolean;
+  /** Crédit en surimpression : complet (lieu + auteur), court (auteur) ou masqué. */
+  credit?: 'full' | 'short' | 'none';
+  creditPosition?: 'top' | 'bottom';
   /** Charge l'image immédiatement (photos visibles dès l'arrivée sur la page). */
   eager?: boolean;
+  /** Image décorative : le texte alternatif est vidé quand le contenu est déjà décrit à côté. */
+  decorative?: boolean;
+  imgClassName?: string;
 };
 
 /**
- * Photo de voyage recadrée dans son conteneur, avec le crédit de l'auteur en surimpression.
- * Le conteneur fixe la taille ; l'image le remplit sans déformation.
+ * Photo de voyage recadrée dans son conteneur, avec le crédit de l'auteur en surimpression
+ * (les licences Creative Commons demandent de citer l'auteur).
  */
-export default function TravelPhotoFrame({ photo, className = '', showCredit = true, eager = false }: TravelPhotoFrameProps) {
+export default function TravelPhotoFrame({
+  photo,
+  className = '',
+  credit = 'full',
+  creditPosition = 'top',
+  eager = false,
+  decorative = false,
+  imgClassName = '',
+}: TravelPhotoFrameProps) {
+  const p = typeof photo === 'string' ? getPhoto(photo) : photo;
+  const top = creditPosition === 'top';
   return (
-    <figure className={`relative overflow-hidden bg-gradient-to-br from-[#DBE5F6] to-[#E6DFF4] ${className}`}>
+    <figure className={`relative overflow-hidden bg-gradient-to-br from-[#dbe5f6] to-[#e6dff4] ${className}`}>
       <img
-        src={photo.src}
-        alt={photo.alt}
+        src={p.src}
+        alt={decorative ? '' : p.alt}
         loading={eager ? 'eager' : 'lazy'}
         decoding="async"
-        className="absolute inset-0 h-full w-full object-cover"
+        className={`absolute inset-0 h-full w-full object-cover ${imgClassName}`}
       />
-      {showCredit && (
-        <figcaption className="absolute inset-x-0 top-0 px-3 pt-2 pb-5 text-right text-[10px] leading-tight font-medium text-white/95 bg-gradient-to-b from-black/45 to-transparent [text-shadow:0_1px_2px_rgba(0,0,0,.5)]">
-          {photo.place} · {photoCredit(photo)}
+      {credit !== 'none' && (
+        <figcaption
+          className={`pointer-events-none absolute inset-x-0 px-3 text-right text-[10px] font-medium leading-tight text-white/95 [text-shadow:0_1px_2px_rgba(0,0,0,.6)] ${
+            top ? 'top-0 pt-2 pb-5 bg-gradient-to-b from-black/40 to-transparent' : 'bottom-0 pb-2 pt-5 bg-gradient-to-t from-black/40 to-transparent'
+          }`}
+        >
+          {credit === 'full' ? `${p.place} · ${photoCredit(p)}` : photoCredit(p)}
         </figcaption>
       )}
     </figure>

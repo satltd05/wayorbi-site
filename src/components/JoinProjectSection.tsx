@@ -4,7 +4,7 @@ import { CheckCircle2 } from 'lucide-react';
 
 const INTEREST_OPTIONS = [
   'Créer mes carnets de voyage',
-  'Consulter des budgets réels',
+  'Comparer des budgets détaillés',
   'Trouver des itinéraires',
   'Partager des bons plans',
 ];
@@ -24,13 +24,13 @@ export default function JoinProjectSection() {
     const trimmedEmail = email.trim();
 
     if (trimmedName.length < 2) {
-      setError('Merci d’indiquer votre prénom (au moins 2 caractères).');
+      setError('Indique ton prénom (au moins 2 caractères).');
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(trimmedEmail)) {
-      setError('Merci de saisir une adresse e-mail valide.');
+      setError('Saisis une adresse e-mail valide, par exemple camille@exemple.fr.');
       return;
     }
 
@@ -44,7 +44,7 @@ export default function JoinProjectSection() {
   return (
     <section
       id="rejoindre"
-      className="relative overflow-hidden bg-gradient-to-br from-[#EAF1FF] via-[#F2F5F9] to-[#F1EBFC] text-[#111827] py-20 sm:py-24 lg:py-28 border-t border-[#E4E9F1]"
+      className="relative overflow-hidden scroll-mt-20 bg-gradient-to-br from-[#eaf1ff] via-mist to-[#f1ebfc] text-ink py-20 sm:py-24 lg:py-28"
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
@@ -60,17 +60,17 @@ export default function JoinProjectSection() {
               Suivre l’évolution de Wayorbi
             </p>
             <h2
-              className="font-display font-bold tracking-tight text-[#111827] text-3xl sm:text-4xl leading-tight"
+              className="font-display font-semibold text-ink text-3xl sm:text-4xl leading-tight"
               style={{ textWrap: 'balance' }}
             >
-              Construisons ensemble le carnet de voyage que vous aimeriez utiliser
+              Construisons ensemble l’application que tu aimerais utiliser
             </h2>
             <p className="text-[#4B5563] leading-relaxed text-base">
-              Wayorbi est un projet en cours de construction. Préparez un message à envoyer depuis votre messagerie si vous souhaitez suivre ses prochaines étapes ou partager vos attentes de voyageur.
+              Wayorbi est un projet en cours de construction. Prépare un message à envoyer depuis ta messagerie pour suivre ses prochaines étapes ou partager tes attentes de voyageur.
             </p>
             <div className="pt-2 space-y-2 text-sm text-[#4B5563]">
               <p>Aucune inscription ni donnée de contact n’est enregistrée sur cette page.</p>
-              <p>Vos retours orientent directement les priorités de la plateforme.</p>
+              <p>Tes retours aident à choisir les priorités du projet.</p>
             </div>
           </motion.div>
 
@@ -88,10 +88,10 @@ export default function JoinProjectSection() {
                   <CheckCircle2 className="w-6 h-6" aria-hidden="true" />
                 </div>
                 <h3 className="font-display text-2xl font-bold text-[#111827]">
-                  Votre message est prêt à être envoyé.
+                  Ton message est prêt à être envoyé.
                 </h3>
                 <p className="text-[#4B5563] leading-relaxed max-w-lg">
-                  Si votre messagerie s’est ouverte, envoyez le courriel pour que votre demande soit reçue. Rien n’a été enregistré automatiquement sur ce site.
+                  Si ta messagerie s’est ouverte, envoie le message pour qu’il soit reçu. Rien n’a été enregistré sur ce site.
                 </p>
                 <button
                   type="button"
@@ -142,7 +142,7 @@ export default function JoinProjectSection() {
 
                 <div className="space-y-2">
                   <span className="block text-sm font-medium text-[#111827]">
-                    Ce qui vous intéresse le plus sur Wayorbi
+                    Ce qui t’intéresse le plus
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {INTEREST_OPTIONS.map((option) => {
@@ -168,7 +168,7 @@ export default function JoinProjectSection() {
 
                 <div className="space-y-1.5">
                   <label htmlFor="wayorbi-message" className="block text-sm font-medium text-[#111827]">
-                    Une suggestion ou une destination que vous aimeriez documenter ? (optionnel)
+                    Une suggestion ou une destination que tu aimerais raconter ? (facultatif)
                   </label>
                   <textarea
                     id="wayorbi-message"
@@ -186,11 +186,11 @@ export default function JoinProjectSection() {
                   </p>
                 )}
 
-                <p className="text-xs text-[#6A7891]">Le bouton ouvre votre messagerie avec un brouillon à envoyer à contact@wayorbi.com. Aucun formulaire n’est transmis par ce site.</p>
+                <p className="text-xs text-[#6A7891]">Le bouton ouvre ta messagerie avec un message prêt à envoyer à contact@wayorbi.com. Ce site ne transmet aucun formulaire.</p>
                 <div className="pt-1">
                   <button
                     type="submit"
-                    className="inline-flex items-center justify-center min-h-[44px] px-6 py-3 rounded-xl text-sm sm:text-base font-medium text-white bg-gradient-to-r from-[#2563EB] via-[#5B7CFA] to-[#7C3AED] hover:brightness-105 shadow-[0_10px_28px_rgba(74,143,245,0.28)] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4A8FF5]"
+                    className="btn-primary"
                   >
                     Préparer mon message e-mail
                   </button>

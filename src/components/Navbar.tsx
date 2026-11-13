@@ -1,55 +1,111 @@
 import { useEffect, useState } from 'react';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { Bookmark, Menu, X } from 'lucide-react';
 import { SiteLink } from './SiteLink';
+import { isBetaOpen } from '../config/site';
+import { useDemoState } from '../lib/demoStore';
 
 const NAV_LINKS = [
-  { href: '/concept', label: 'Le concept' },
-  { href: '/carnets', label: 'Carnets' },
-  { href: '/explorer', label: 'Explorer' },
-  { href: '/communaute', label: 'Communauté' },
-  { href: '/travel-dna', label: 'Travel DNA' },
-  { href: '/fonctionnalites', label: 'Fonctionnalités' },
+  { href: '/carnets', label: 'Carnets', match: ['/carnets', '/atelier'] },
+  { href: '/explorer', label: 'Explorer', match: ['/explorer'] },
+  { href: '/communaute', label: 'Voyageurs', match: ['/communaute', '/voyageurs'] },
+  { href: '/travel-dna', label: 'Travel DNA', match: ['/travel-dna'] },
+  { href: '/concept', label: 'Le concept', match: ['/concept'] },
+  { href: '/fonctionnalites', label: 'Fonctionnalités', match: ['/fonctionnalites'] },
 ];
+
+const isActive = (path: string, prefixes: string[]) => prefixes.some((p) => path === p || path.startsWith(`${p}/`));
 
 export default function Navbar({ currentPath = '/' }: { currentPath?: string }) {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const { saves, follows } = useDemoState();
+  const kept = saves.length + follows.length;
+  const betaOpen = isBetaOpen();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 16);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-  useEffect(() => setMobileOpen(false), [currentPath]);
+  useEffect(() => setOpen(false), [currentPath]);
 
   return (
-    <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-200 ${scrolled ? 'bg-white/95 backdrop-blur-xl border-b border-[#E4E9F1] shadow-[0_8px_24px_rgba(17,24,39,0.05)]' : 'bg-[#F2F5F9]/90 backdrop-blur-xl border-b border-white/60'}`}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-[76px] flex items-center justify-between gap-4">
-        <SiteLink to="/" aria-label="Wayorbi, accueil" className="flex items-center gap-2.5 group shrink-0">
-          <img src="/logo-wayorbi.png" alt="" className="h-10 w-10 rounded-xl shadow-[0_4px_15px_rgba(55,98,210,.15)]" />
-          <span className="font-display text-xl font-bold tracking-tight text-[#111827] group-hover:text-[#496BE6] transition">Wayorbi<span className="text-[#8C7EE6]">.</span></span>
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,border-color] duration-200 ${
+        scrolled || open ? 'border-b border-line bg-white/92 shadow-[0_8px_24px_-16px_rgba(19,32,63,0.35)] backdrop-blur-xl' : 'border-b border-transparent bg-mist/70 backdrop-blur-md'
+      }`}
+    >
+      <div className="container-wide flex h-[72px] items-center justify-between gap-4">
+        <SiteLink to="/" aria-label="Wayorbi, accueil" className="flex shrink-0 items-center gap-2.5">
+          <img src="/logo-wayorbi.png" alt="" width={40} height={40} className="h-10 w-10 rounded-xl shadow-[0_4px_14px_rgba(55,98,210,0.18)]" />
+          <span className="wordmark text-[1.55rem] leading-none">Wayorbi</span>
         </SiteLink>
-        <nav aria-label="Navigation principale" className="hidden xl:flex items-center gap-5 text-[13px] font-semibold text-[#606B82]">
-          {NAV_LINKS.map((link) => (
-            <SiteLink key={link.href} to={link.href} aria-current={currentPath === link.href ? 'page' : undefined} className={`relative py-2 whitespace-nowrap transition-colors hover:text-[#3556D1] ${currentPath === link.href ? 'text-[#3556D1]' : ''}`}>
-              {link.label}{currentPath === link.href && <span className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-[#5472F7]" />}
-            </SiteLink>
-          ))}
+
+        <nav aria-label="Navigation principale" className="hidden items-center gap-1 xl:flex">
+          {NAV_LINKS.map((link) => {
+            const active = isActive(currentPath, link.match);
+            return (
+              <SiteLink
+                key={link.href}
+                to={link.href}
+                aria-current={active ? 'page' : undefined}
+                className={`rounded-full px-3.5 py-2 text-[0.9rem] font-medium transition-colors ${active ? 'bg-ink text-white' : 'text-ink-soft hover:bg-white hover:text-ink'}`}
+              >
+                {link.label}
+              </SiteLink>
+            );
+          })}
         </nav>
-        <div className="flex items-center gap-2 shrink-0">
-          <SiteLink to="/beta" className="hidden sm:inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-sm font-semibold text-white rounded-xl bg-gradient-to-r from-[#2563EB] via-[#5B7CFA] to-[#7C3AED] hover:brightness-110 shadow-[0_8px_20px_rgba(74,143,245,0.26)] transition-all">
-            Tester Wayorbi <ArrowUpRight size={15}/>
+
+        <div className="flex shrink-0 items-center gap-2">
+          <SiteLink
+            to="/mon-espace"
+            aria-current={currentPath === '/mon-espace' ? 'page' : undefined}
+            className="relative inline-flex h-10 items-center gap-2 rounded-full border border-line bg-white px-3.5 text-sm font-medium text-ink hover:border-sky/50"
+          >
+            <Bookmark size={16} aria-hidden="true" />
+            <span className="hidden sm:inline">Mon espace</span>
+            {kept > 0 && (
+              <span className="grid h-5 min-w-5 place-items-center rounded-full bg-sky px-1 text-[11px] font-semibold text-white" aria-label={`${kept} éléments gardés`}>
+                {kept}
+              </span>
+            )}
           </SiteLink>
-          <button type="button" onClick={() => setMobileOpen(v => !v)} aria-expanded={mobileOpen} aria-controls="mobile-navigation" aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'} className="xl:hidden inline-flex items-center justify-center w-11 h-11 rounded-xl hover:bg-white text-[#111827] focus-visible:ring-2 focus-visible:ring-blue-500">
-            {mobileOpen ? <X size={21}/> : <Menu size={21}/>}
+          <SiteLink to="/beta" className={`hidden md:inline-flex ${betaOpen ? 'btn-primary' : 'btn-secondary'} !min-h-10 !py-2`}>
+            {betaOpen ? 'Tester la maquette' : 'Bêta terminée'}
+          </SiteLink>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="menu-mobile"
+            aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
+            className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white text-ink xl:hidden"
+          >
+            {open ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
           </button>
         </div>
       </div>
-      {mobileOpen && (
-        <nav id="mobile-navigation" aria-label="Menu mobile" className="xl:hidden max-h-[80vh] overflow-y-auto bg-white/98 border-t border-[#E4E9F1] px-4 sm:px-8 py-4 grid grid-cols-2 gap-2 shadow-xl">
-          {NAV_LINKS.map(link => <SiteLink key={link.href} to={link.href} onClick={() => setMobileOpen(false)} className={`p-3 rounded-xl text-sm font-semibold ${currentPath===link.href ? 'bg-[#EAF0FF] text-[#3158CF]' : 'bg-[#F6F8FC] text-[#374151]'}`}>{link.label}</SiteLink>)}
-          <SiteLink to="/beta" onClick={() => setMobileOpen(false)} className="col-span-2 p-3 rounded-xl bg-gradient-to-r from-blue-600 to-violet-600 text-center text-white text-sm font-bold">Participer à la bêta</SiteLink>
+
+      {open && (
+        <nav id="menu-mobile" aria-label="Menu" className="max-h-[calc(100vh-72px)] overflow-y-auto border-t border-line bg-white px-4 py-4 xl:hidden">
+          <ul className="grid gap-1 sm:grid-cols-2">
+            {[...NAV_LINKS, { href: '/atelier', label: 'Atelier carnet', match: ['/atelier'] }, { href: '/faq', label: 'Questions fréquentes', match: ['/faq'] }].map((link) => (
+              <li key={link.href}>
+                <SiteLink
+                  to={link.href}
+                  aria-current={isActive(currentPath, link.match) ? 'page' : undefined}
+                  className={`block rounded-2xl px-4 py-3 text-base font-medium ${isActive(currentPath, link.match) ? 'bg-ink text-white' : 'text-ink hover:bg-mist'}`}
+                >
+                  {link.label}
+                </SiteLink>
+              </li>
+            ))}
+          </ul>
+          <SiteLink to="/beta" className={`mt-3 w-full ${betaOpen ? 'btn-primary' : 'btn-secondary'}`}>
+            {betaOpen ? 'Tester la maquette (bêta)' : 'Le bêta-test est terminé'}
+          </SiteLink>
         </nav>
       )}
     </header>

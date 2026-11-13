@@ -1,33 +1,35 @@
 <!doctype html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#F2F5F9" />
+    <meta name="theme-color" content="#f3f6fb" />
     <link rel="icon" type="image/png" href="/logo-wayorbi.png" />
-    <title>Wayorbi — Le réseau social du voyage et des carnets interactifs</title>
+    <link rel="apple-touch-icon" href="/logo-wayorbi.png" />
+    <title>Wayorbi — Le réseau social des carnets de voyage</title>
     <meta
       name="description"
-      content="Découvrez Wayorbi, le réseau social dédié au voyage : partagez vos carnets interactifs, explorez des itinéraires, consultez des budgets réels et profitez des conseils de voyageurs."
+      content="Wayorbi est un projet de réseau social consacré aux carnets de voyage : des récits structurés qui relient étapes, transports, budgets et conseils. Ce site présente le concept et des démonstrations."
     />
-    <meta property="og:title" content="Wayorbi — Le réseau social du voyage et des carnets interactifs" />
-    <meta
-      property="og:description"
-      content="Partagez vos expériences de voyage à travers des carnets interactifs, itinéraires et budgets réels."
-    />
+    <!-- Aperçu des liens partagés. __SITE_URL__ est remplacé à la compilation par l'adresse publique (variable SITE_URL, voir README). -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Wayorbi" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content="Wayorbi — Le réseau social des carnets de voyage" />
+    <meta property="og:description" content="Un projet de réseau social où les voyageurs partagent des carnets structurés : itinéraires, transports, budgets et conseils." />
+    <meta property="og:image" content="__SITE_URL__/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Logo Wayorbi et photos de voyage" />
     <meta name="twitter:card" content="summary_large_image" />
-    <!-- Définir une URL HTTPS absolue pour og:image et twitter:image après publication. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..600&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="/fonts/inter-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/fraunces-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   </head>
-  <body class="bg-[#F2F5F9] text-[#111827] antialiased selection:bg-[#4A8FF5]/20 selection:text-[#111827]">
+  <body>
+    <noscript>
+      <p style="font-family: sans-serif; padding: 2rem; text-align: center">Le site Wayorbi a besoin de JavaScript pour afficher ses démonstrations interactives.</p>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

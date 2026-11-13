@@ -1,5 +1,6 @@
-// Photos de voyage libres de droits (Wikimedia Commons), utilisées pour illustrer les carnets d'exemple.
-// Fichier généré : chaque photo garde son auteur, sa licence et sa page source pour les crédits.
+// Photos de voyage libres de droits (Wikimedia Commons) qui illustrent les carnets d'exemple.
+// Chaque photo garde son auteur, sa licence et sa page source : ils sont affichés sur l'image et sur la page /credits.
+// Pour ajouter une photo : déposer le fichier dans public/photos/ puis ajouter une entrée ci-dessous avec son crédit.
 
 export interface TravelPhoto {
   id: string;
@@ -12,7 +13,7 @@ export interface TravelPhoto {
   sourceUrl: string;
 }
 
-export const TRAVEL_PHOTOS: TravelPhoto[] = [
+export const TRAVEL_PHOTOS = [
   {
     "id": "japon-cover",
     "src": "/photos/japon-cover.jpg",
@@ -522,47 +523,306 @@ export const TRAVEL_PHOTOS: TravelPhoto[] = [
     "license": "CC BY 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sk%C3%B3gafoss_Waterfall,_Iceland,_20240720_1318_2975.jpg"
+  },
+  {
+    "id": "edimbourg",
+    "src": "/photos/edimbourg.jpg",
+    "alt": "Vieille ville d’Édimbourg vue depuis Calton Hill, un canon ancien au premier plan",
+    "place": "Calton Hill, Édimbourg",
+    "author": "Daniel Kraft",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_cannon_and_old_town_20211020.jpg"
+  },
+  {
+    "id": "fortwilliam",
+    "src": "/photos/fortwilliam.jpg",
+    "alt": "Vallée verdoyante du Glen Nevis au pied des montagnes",
+    "place": "Glen Nevis, Highlands",
+    "author": "Bert Kaufmann from Roermond, Netherlands",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Glen_Nevis_(2477757595).jpg"
+  },
+  {
+    "id": "mallaig",
+    "src": "/photos/mallaig.jpg",
+    "alt": "Bateaux de pêche amarrés dans le port de Mallaig",
+    "place": "Port de Mallaig",
+    "author": "Alan Reid",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mallaig_harbour_-_geograph.org.uk_-_2545896.jpg"
+  },
+  {
+    "id": "portree",
+    "src": "/photos/portree.jpg",
+    "alt": "Maisons colorées alignées sur le port de Portree",
+    "place": "Portree, île de Skye",
+    "author": "DeFacto",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour_front_2016.jpg"
+  },
+  {
+    "id": "eileandonan",
+    "src": "/photos/eileandonan.jpg",
+    "alt": "Le château d’Eilean Donan sur son îlot, devant les montagnes",
+    "place": "Château d’Eilean Donan",
+    "author": "Eusebius",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_castle_-_140mm.jpg"
+  },
+  {
+    "id": "hanoi",
+    "src": "/photos/hanoi.jpg",
+    "alt": "Marché aux fleurs le soir dans la vieille ville de Hanoï, scooters garés devant les étals",
+    "place": "Vieille ville de Hanoï",
+    "author": "Jakub Hałun",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Old_Quarter_market,_Hanoi,_Vietnam,_20240204_1810_5887.jpg"
+  },
+  {
+    "id": "hanoi-lac",
+    "src": "/photos/hanoi-lac.jpg",
+    "alt": "Le lac Hoàn Kiếm vu à travers les branches",
+    "place": "Lac Hoàn Kiếm, Hanoï",
+    "author": "Ltn12345",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hoan_Kiem_Lake_4123.jpg"
+  },
+  {
+    "id": "ninhbinh",
+    "src": "/photos/ninhbinh.jpg",
+    "alt": "Rizières au pied des pitons karstiques de Tam Cốc",
+    "place": "Tam Cốc, Ninh Bình",
+    "author": "Andre Hospers",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tam_Coc_Ninh_Binh_(29079).jpg"
+  },
+  {
+    "id": "hue",
+    "src": "/photos/hue.jpg",
+    "alt": "La pagode Thiên Mụ et sa tour octogonale",
+    "place": "Pagode Thiên Mụ, Huế",
+    "author": "CEphoto, Uwe Aranas",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hue_Vietnam_Thien-Mu-Temple-and-Pagoda-01.jpg"
+  },
+  {
+    "id": "haivan",
+    "src": "/photos/haivan.jpg",
+    "alt": "La côte et la lagune de Lăng Cô vues depuis le col des Nuages",
+    "place": "Col des Nuages (Hải Vân)",
+    "author": "Steffen Schmitz",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C4%83ng_C%C3%B4,_H%E1%BA%A3i_V%C3%A2n_Pass,_2020-01_CN-04.jpg"
+  },
+  {
+    "id": "siusi",
+    "src": "/photos/siusi.jpg",
+    "alt": "Chemin à travers les alpages de l’Alpe di Siusi, face aux sommets des Dolomites",
+    "place": "Alpe di Siusi",
+    "author": "H. Zell",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Seiser_Alm_16.jpg"
+  },
+  {
+    "id": "corvara",
+    "src": "/photos/corvara.jpg",
+    "alt": "Moutons dans un alpage près de Corvara, au pied des parois rocheuses",
+    "place": "Corvara, Val Badia",
+    "author": "H. Zell",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sheep_-_Corvara.jpg"
+  },
+  {
+    "id": "braies",
+    "src": "/photos/braies.jpg",
+    "alt": "Barques en bois sur les eaux turquoise du lac de Braies",
+    "place": "Lac de Braies",
+    "author": "kallerna",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lago_di_Braies_South_Tyrol_6.jpg"
+  },
+  {
+    "id": "seville",
+    "src": "/photos/seville.jpg",
+    "alt": "La cathédrale de Séville et la Giralda illuminées à l’heure bleue",
+    "place": "Giralda, Séville",
+    "author": "Diliff",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Plaza_Virgen_de_los_Reyes,_Seville,_Spain_-_Sep_2009.jpg"
+  },
+  {
+    "id": "cordoue-mezquita",
+    "src": "/photos/cordoue-mezquita.jpg",
+    "alt": "Forêt d’arcs bicolores à l’intérieur de la mosquée-cathédrale de Cordoue",
+    "place": "Mosquée-cathédrale de Cordoue",
+    "author": "CEphoto, Uwe Aranas",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:C%C3%B3rdoba_Spain_Mezquita-Catedral-de-C%C3%B3rdoba-01.jpg"
+  },
+  {
+    "id": "cordoue-pont",
+    "src": "/photos/cordoue-pont.jpg",
+    "alt": "Le pont romain sur le Guadalquivir devant la mosquée-cathédrale",
+    "place": "Pont romain, Cordoue",
+    "author": "Jose María Ligero Loarte",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Centro_Hist%C3%B3rico,_16.9_--_2023_--_C%C3%B3rdoba,_Espa%C3%B1a.jpg"
+  },
+  {
+    "id": "albaicin",
+    "src": "/photos/albaicin.jpg",
+    "alt": "Maisons blanches de l’Albaicín et du Sacromonte à Grenade",
+    "place": "Albaicín, Grenade",
+    "author": "Jebulon",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Albaicin_2012_San_Nicolas_Sacromonte.jpg"
+  },
+  {
+    "id": "ljubljana",
+    "src": "/photos/ljubljana.jpg",
+    "alt": "Façades se reflétant dans la rivière Ljubljanica au centre de Ljubljana",
+    "place": "Ljubljanica, Ljubljana",
+    "author": "Mihael Grmek",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ljubljanica_01.jpg"
+  },
+  {
+    "id": "vrsic",
+    "src": "/photos/vrsic.jpg",
+    "alt": "Sommets des Alpes juliennes vus depuis le col de Vršič",
+    "place": "Col de Vršič",
+    "author": "Krzysztof Golik",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Julian_Alps_from_Vrsic_Pass_(3).jpg"
+  },
+  {
+    "id": "bovec",
+    "src": "/photos/bovec.jpg",
+    "alt": "La Soča au fond d’une vallée boisée près de Bovec",
+    "place": "La Soča près de Bovec",
+    "author": "Lorenzo MICHIELLI",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:So%C4%8Da,_Bovec_-_2008-06-08.jpg"
+  },
+  {
+    "id": "reykjavik",
+    "src": "/photos/reykjavik.jpg",
+    "alt": "Toits colorés de Reykjavík vus depuis la tour de Hallgrímskirkja",
+    "place": "Reykjavík",
+    "author": "Jakec",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:View_from_Hallgr%C3%ADmskirkja_4.JPG"
+  },
+  {
+    "id": "reykjadalur",
+    "src": "/photos/reykjadalur.jpg",
+    "alt": "Rivière chaude serpentant dans la vallée de Reykjadalur",
+    "place": "Vallée de Reykjadalur",
+    "author": "Jakub Hałun",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Reykjadalur_Valley,_Iceland,_20230502_1406_4226.jpg"
+  },
+  {
+    "id": "geysir",
+    "src": "/photos/geysir.jpg",
+    "alt": "Éruption du geyser Strokkur à contre-jour",
+    "place": "Strokkur, Geysir",
+    "author": "Andreas Tille",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Strokkur_geyser_eruption,_close-up_view.jpg"
+  },
+  {
+    "id": "vik",
+    "src": "/photos/vik.jpg",
+    "alt": "Plage de sable noir et rocher de basalte à Reynisfjara",
+    "place": "Reynisfjara, près de Vík",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Reynisfjara,_Su%C3%B0urland,_Islandia,_2014-08-17,_DD_164.JPG"
+  },
+  {
+    "id": "food-ramen",
+    "src": "/photos/food-ramen.jpg",
+    "alt": "Bol de ramen garni d’œuf, de porc et de chou",
+    "place": "Ramen",
+    "author": "Ocdp",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ramen_Jump_002.jpg"
+  },
+  {
+    "id": "food-hida",
+    "src": "/photos/food-hida.jpg",
+    "alt": "Sushi de bœuf légèrement grillé, spécialité de la région de Hida",
+    "place": "Sushi de bœuf, région de Hida",
+    "author": "fullfen666",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:%E3%80%90%E6%97%A5%E6%9C%AC%E3%80%82%E4%B8%8B%E5%91%82%E6%95%A3%E7%AD%96%E3%80%91_(33375284736).jpg"
+  },
+  {
+    "id": "food-nata",
+    "src": "/photos/food-nata.jpg",
+    "alt": "Plaque de pastéis de nata dorés et caramélisés",
+    "place": "Pastéis de nata",
+    "author": "Photo Claude TRUONG-NGOC",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pastel_de_nata_septembre_2015.jpg"
+  },
+  {
+    "id": "food-pho",
+    "src": "/photos/food-pho.jpg",
+    "alt": "Bol de phở au bœuf garni d’herbes fraîches",
+    "place": "Phở bò",
+    "author": "Andy Li",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Beef_noodle_soup_(Ph%E1%BB%9F_b%C3%B2)_-_Pho_Hanoi_Authentic_2024-12-01.jpg"
+  },
+  {
+    "id": "food-salmorejo",
+    "src": "/photos/food-salmorejo.jpg",
+    "alt": "Bol de salmorejo garni de jambon et d’œuf",
+    "place": "Salmorejo",
+    "author": "P.Lechien",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Salmorejo_cordouan.JPG"
   }
-];
+] as const satisfies readonly TravelPhoto[];
 
-const BY_ID = new Map(TRAVEL_PHOTOS.map((p) => [p.id, p]));
+/** Identifiant d'une photo existante : une faute de frappe est signalée dès la compilation. */
+export type PhotoId = (typeof TRAVEL_PHOTOS)[number]['id'];
 
-/** Retourne une photo par identifiant. */
-export function getPhoto(id: string): TravelPhoto {
+const BY_ID = new Map<string, TravelPhoto>(TRAVEL_PHOTOS.map((photo) => [photo.id, photo]));
+
+export function getPhoto(id: PhotoId): TravelPhoto {
   const photo = BY_ID.get(id);
   if (!photo) throw new Error(`Photo inconnue : ${id}`);
   return photo;
 }
-
-/** Photo de couverture de chaque carnet, par identifiant de carnet. */
-export const JOURNEY_COVERS: Record<string, string> = {
-  japon: 'japon-cover',
-  norvege: 'norvege-cover',
-  portugal: 'portugal-cover',
-};
-
-/** Photos de chaque étape de carnet, par identifiant d'étape. */
-export const STEP_PHOTOS: Record<string, string[]> = {
-  tokyo: ['tokyo-1', 'tokyo-2', 'tokyo-3'],
-  matsumoto: ['matsumoto-1', 'matsumoto-2', 'matsumoto-3'],
-  takayama: ['takayama-1', 'takayama-2', 'takayama-3'],
-  kyoto: ['kyoto-1', 'kyoto-2', 'kyoto-3'],
-  oslo: ['oslo-1', 'oslo-2', 'oslo-3'],
-  flam: ['flam-1', 'flam-2', 'flam-3'],
-  geiranger: ['geiranger-1', 'geiranger-2', 'geiranger-3'],
-  bergen: ['bergen-1', 'bergen-2', 'bergen-3'],
-  porto: ['porto-1', 'porto-2', 'porto-3'],
-  coimbra: ['coimbra-1', 'coimbra-2', 'coimbra-3'],
-  lisbonne: ['lisbonne-1', 'lisbonne-2', 'lisbonne-3'],
-  sagres: ['sagres-1', 'sagres-2', 'sagres-3'],
-};
-
-/** Photos de chaque fiche Explorer, par identifiant de fiche. */
-export const EXPLORER_PHOTOS: Record<string, string[]> = {
-  'exp-1': ['exp-1-a', 'exp-1-b'],
-  'exp-2': ['exp-2-a', 'exp-2-b'],
-  'exp-3': ['exp-3-a', 'exp-3-b'],
-  'exp-4': ['exp-4-a', 'exp-4-b'],
-  'exp-5': ['exp-5-a', 'exp-5-b'],
-  'exp-6': ['exp-6-a', 'exp-6-b'],
-};

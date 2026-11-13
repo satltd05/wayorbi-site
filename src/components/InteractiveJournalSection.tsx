@@ -96,7 +96,7 @@ export default function InteractiveJournalSection() {
           })}
         </div>
 
-        <div className="grid items-start gap-6 lg:grid-cols-12 lg:gap-8">
+        <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-12 lg:gap-8">
           <div className="overflow-hidden rounded-[1.5rem] bg-night text-white lg:sticky lg:top-28 lg:col-span-7">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 px-5 py-4 sm:px-6">
               <div>

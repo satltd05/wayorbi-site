@@ -67,7 +67,7 @@ export default function ConceptOverviewSection() {
           <p className="mt-4 text-lg text-ink-soft">Plutôt que de disperser souvenirs, trajets et dépenses entre plusieurs applications, Wayorbi rassemble tout dans un récit que d’autres peuvent suivre.</p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-12">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
           <div className="rounded-[1.5rem] border border-line p-5 sm:p-6 lg:col-span-7">
             <div role="radiogroup" aria-label="Moment du voyage" className="flex flex-wrap gap-2">
               {PHASES.map((p, index) => (
@@ -76,7 +76,7 @@ export default function ConceptOverviewSection() {
                 </button>
               ))}
             </div>
-            <div className="mt-5 grid gap-5 sm:grid-cols-2 sm:items-center">
+            <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:items-center">
               <TravelPhotoFrame key={phase.photo} photo={phase.photo} credit="short" creditPosition="bottom" className="aspect-[4/3] rounded-[1.25rem]" />
               <div>
                 <h3 className="font-display text-2xl font-semibold text-ink">{phase.title}</h3>

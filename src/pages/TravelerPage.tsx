@@ -63,7 +63,7 @@ export default function TravelerPage({ id }: { id: string }) {
             </div>
           </div>
 
-          <div className="mt-8 grid gap-10 lg:grid-cols-12">
+          <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-12">
             <div className="lg:col-span-7">
               <p className="text-lg font-medium text-ink">{traveler.label}</p>
               <p className="story-text mt-3">{traveler.bio}</p>
@@ -125,7 +125,7 @@ export default function TravelerPage({ id }: { id: string }) {
           <h2 id="carnets-publies" className="flex items-center gap-3 font-display text-3xl font-semibold text-ink">
             <BookOpen size={24} className="text-sky" aria-hidden="true" /> Carnets publiés
           </h2>
-          <div className="mt-8 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {carnets.map((carnet) => (
               <CarnetCard key={carnet.id} carnet={carnet} />
             ))}
@@ -134,7 +134,7 @@ export default function TravelerPage({ id }: { id: string }) {
       </section>
 
       <section className="section-pad bg-white" aria-labelledby="conseils-voyageur">
-        <div className="container-wide grid gap-12 lg:grid-cols-12">
+        <div className="container-wide grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <h2 id="conseils-voyageur" className="flex items-center gap-3 font-display text-3xl font-semibold text-ink">
               <Lightbulb size={24} className="text-lagoon" aria-hidden="true" /> Ses conseils

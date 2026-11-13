@@ -63,12 +63,12 @@ export default function TravelDnaPage() {
       />
 
       <section id="questionnaire" className="scroll-mt-24 pb-16" aria-labelledby="questionnaire-titre">
-        <div className="container-wide grid items-start gap-8 lg:grid-cols-12">
+        <div className="container-wide grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
           <div className="lg:col-span-8">
             <h2 id="questionnaire-titre" className="sr-only">
               Tes préférences de voyage
             </h2>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {DNA_FIELDS.map((field, index) => (
                 <fieldset key={field.key} className="min-w-0 rounded-[var(--radius-card)] border border-line bg-white p-5">
                   <legend className="sr-only">{field.title}</legend>
@@ -119,13 +119,13 @@ export default function TravelDnaPage() {
               Trois carnets pour toi
             </h2>
             <p className="mt-3 text-ink-soft">Les étiquettes indiquent les critères que chaque carnet partage avec ton Travel DNA. Modifie un critère : les suggestions se mettent à jour.</p>
-            <div className="mt-8 grid gap-x-6 gap-y-10 md:grid-cols-3">
+            <div className="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-3">
               {carnets.map((match) => (
                 <CarnetCard key={match.carnet.id} carnet={match.carnet} reasons={match.reasons} />
               ))}
             </div>
 
-            <div className="mt-16 grid gap-10 lg:grid-cols-12">
+            <div className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-12">
               <div className="lg:col-span-7">
                 <h2 className="font-display text-2xl font-semibold text-ink">Voyageurs à suivre</h2>
                 {travelers.length === 0 ? (
@@ -154,7 +154,7 @@ export default function TravelDnaPage() {
             <details className="mt-14 rounded-[var(--radius-card)] border border-line bg-mist p-5 sm:p-6">
               <summary className="cursor-pointer font-semibold text-ink">Comment le calcul fonctionne</summary>
               <p className="mt-3 text-sm text-ink-soft">Chaque carnet reçoit des points selon tes huit critères ; les trois meilleurs sont proposés. Aucune donnée ne quitte ton navigateur.</p>
-              <dl className="mt-4 grid gap-3 sm:grid-cols-2">
+              <dl className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {RULES.map(([term, detail]) => (
                   <div key={term} className="rounded-2xl bg-white p-4">
                     <dt className="text-sm font-semibold text-ink">{term}</dt>

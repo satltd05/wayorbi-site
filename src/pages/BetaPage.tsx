@@ -64,7 +64,7 @@ export default function BetaPage() {
             title="Comment se passe le test"
             description="Les consignes exactes et les missions sont présentées dans la maquette. Voici le déroulement général."
           />
-          <ol className="grid gap-5 md:grid-cols-3">
+          <ol className="grid grid-cols-1 gap-5 md:grid-cols-3">
             {STEPS.map((step, index) => (
               <li key={step.title} className="rounded-[1.5rem] border border-line bg-mist p-7">
                 <span className="font-display text-5xl font-semibold text-sky/35" aria-hidden="true">
@@ -82,7 +82,7 @@ export default function BetaPage() {
       </section>
 
       <section className="section-pad bg-mist" aria-labelledby="utile-titre">
-        <div className="container-wide grid items-center gap-10 lg:grid-cols-2">
+        <div className="container-wide grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
           <div>
             <SectionHeading id="utile-titre" title="Un retour utile vaut mieux qu’un simple clic" className="!mb-6" />
             <p className="text-lg leading-relaxed text-ink-soft">Le test sert à vérifier que le concept est compréhensible, que la création d’un carnet semble naturelle et que Wayorbi répond aux attentes des voyageurs. Les commentaires détaillés sont les plus précieux.</p>

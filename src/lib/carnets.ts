@@ -130,11 +130,28 @@ export function carnetHaystack(carnet: Carnet) {
   return value;
 }
 
-/** Tous les mots de la recherche doivent apparaître dans le carnet (sans tenir compte des accents). */
+const STOP_WORDS = new Set(['de', 'du', 'des', 'la', 'le', 'les', 'l', 'd', 'un', 'une', 'et', 'en', 'a', 'au', 'aux', 'pour', 'par', 'sur']);
+
+/** L'expression exacte apparaît-elle dans le texte (sans tenir compte des accents) ? */
+export function matchesPhrase(text: string, query: string) {
+  const phrase = normalizeText(query).trim().replace(/\s+/g, ' ');
+  return phrase !== '' && normalizeText(text).replace(/\s+/g, ' ').includes(phrase);
+}
+
+/** Tous les mots utiles de la recherche doivent apparaître dans le texte (sans tenir compte des accents). */
 export function matchesQuery(text: string, query: string) {
-  const words = normalizeText(query).split(/\s+/).filter(Boolean);
+  const words = normalizeText(query)
+    .split(/[\s'’]+/)
+    .filter((word) => word && !STOP_WORDS.has(word));
   const target = normalizeText(text);
-  return words.every((word) => target.includes(word));
+  return words.length === 0 ? matchesPhrase(text, query) : words.every((word) => target.includes(word));
+}
+
+/** Recherche : l'expression exacte d'abord ; à défaut, tous les mots utiles. */
+export function searchFilter<T>(items: T[], query: string, toText: (item: T) => string): T[] {
+  if (!query.trim()) return items;
+  const exact = items.filter((item) => matchesPhrase(toText(item), query));
+  return exact.length > 0 ? exact : items.filter((item) => matchesQuery(toText(item), query));
 }
 
 /**

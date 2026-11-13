@@ -41,7 +41,7 @@ export default function PrivacyPage() {
             </ul>
             <div className="mt-5 flex flex-wrap items-center gap-3">
               <button type="button" onClick={clear} className="btn-secondary">
-                <Trash2 size={16} aria-hidden="true" /> Effacer mes données de démonstration
+                <Trash2 size={16} aria-hidden="true" /> Effacer mes données de démo
               </button>
               <p role="status" className="text-sm text-success">
                 {done ? 'Les données de démonstration ont été effacées de ce navigateur.' : ''}

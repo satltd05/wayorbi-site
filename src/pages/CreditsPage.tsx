@@ -68,7 +68,7 @@ export default function CreditsPage() {
                 ) : undefined
               }
             />
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {group.photos.map((photo) => (
                 <CreditCard key={photo.id} photo={photo} />
               ))}

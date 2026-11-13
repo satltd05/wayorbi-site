@@ -2,8 +2,8 @@ import { useId, useMemo } from 'react';
 import { Lightbulb, RotateCcw, Search, SlidersHorizontal, Sparkles } from 'lucide-react';
 import { CARNETS, type Carnet, type Interest, type TransportMode, type TripType } from '../data/carnets';
 import { TRAVELERS } from '../data/travelers';
-import { allTips, carnetDays, carnetHaystack, matchesQuery, perPerson, transportsUsed } from '../lib/carnets';
-import { normalizeText, plural } from '../lib/format';
+import { allTips, carnetDays, carnetHaystack, matchesQuery, perPerson, searchFilter, transportsUsed } from '../lib/carnets';
+import { plural } from '../lib/format';
 import { navigate, useLocation } from '../lib/router';
 import { useDemoState } from '../lib/demoStore';
 import { isValidDna, scoreCarnet } from '../lib/dna';
@@ -73,8 +73,7 @@ export default function ExplorerPage() {
   const activeCount = FILTER_KEYS.filter((k) => k !== 'tri' && filters[k]).length;
 
   const results = useMemo(() => {
-    const list = CARNETS.filter((carnet) => {
-      if (filters.q && !matchesQuery(carnetHaystack(carnet), filters.q)) return false;
+    const list = searchFilter(CARNETS, filters.q, carnetHaystack).filter((carnet) => {
       if (filters.dest && carnet.region !== filters.dest && carnet.country !== filters.dest) return false;
       const budget = BUDGETS.find((b) => b.value === filters.budget);
       if (budget && !budget.test(perPerson(carnet))) return false;
@@ -97,16 +96,16 @@ export default function ExplorerPage() {
   }, [filters.q, filters.dest, filters.budget, filters.duree, filters.type, filters.transport, filters.envie, sort, savedDna]);
 
   const tips = useMemo(() => {
-    const list = allTips().filter((t) => !filters.q || matchesQuery(`${t.title} ${t.detail} ${t.step.city} ${t.carnet.country}`, filters.q));
+    const list = searchFilter(allTips(), filters.q, (t) => `${t.title} ${t.detail} ${t.step.city} ${t.carnet.country}`);
     if (filters.q) return list.slice(0, 6);
     const seen = new Set<string>();
     return list.filter((t) => (seen.has(t.carnet.id) ? false : (seen.add(t.carnet.id), true))).slice(0, 6);
   }, [filters.q]);
 
-  const travelers = useMemo(() => {
-    const q = filters.q ? normalizeText(filters.q) : '';
-    return TRAVELERS.filter((t) => (!filters.envie || t.interests.includes(filters.envie as Interest)) && (!q || normalizeText(`${t.name} ${t.label} ${t.bio} ${t.interests.join(' ')}`).includes(q)));
-  }, [filters.q, filters.envie]);
+  const travelers = useMemo(
+    () => searchFilter(TRAVELERS, filters.q, (t) => `${t.name} ${t.label} ${t.bio} ${t.interests.join(' ')}`).filter((t) => !filters.envie || t.interests.includes(filters.envie as Interest)),
+    [filters.q, filters.envie],
+  );
 
   return (
     <>
@@ -154,7 +153,7 @@ export default function ExplorerPage() {
             <p className="mb-4 flex items-center gap-2 text-sm font-semibold text-ink">
               <SlidersHorizontal size={16} aria-hidden="true" /> Affiner
             </p>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
               <SelectField label="Destination" value={filters.dest} onChange={(v) => setFilter('dest', v)} allLabel="Toutes" options={[{ value: 'Europe', label: 'Europe' }, { value: 'Asie', label: 'Asie' }, ...COUNTRIES.map((c) => ({ value: c, label: c }))]} />
               <SelectField label="Budget par personne" value={filters.budget} onChange={(v) => setFilter('budget', v)} allLabel="Tous" options={BUDGETS} />
               <SelectField label="Durée" value={filters.duree} onChange={(v) => setFilter('duree', v)} allLabel="Toutes" options={DURATIONS} />
@@ -205,7 +204,7 @@ export default function ExplorerPage() {
               </button>
             </div>
           ) : (
-            <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
               {results.map(({ carnet, match }) => (
                 <CarnetCard key={carnet.id} carnet={carnet} reasons={sort === 'dna' && match ? match.reasons.slice(0, 4) : undefined} />
               ))}
@@ -215,7 +214,7 @@ export default function ExplorerPage() {
       </section>
 
       <section className="section-pad bg-white" aria-labelledby="conseils-titre">
-        <div className="container-wide grid gap-12 lg:grid-cols-12">
+        <div className="container-wide grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <h2 id="conseils-titre" className="font-display text-3xl font-semibold text-ink">
               {filters.q ? `Conseils liés à « ${filters.q} »` : 'Conseils de voyageurs'}

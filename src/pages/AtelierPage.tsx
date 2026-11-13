@@ -138,14 +138,14 @@ export default function AtelierPage() {
                 e.preventDefault();
                 goTo(2);
               }}
-              className="grid gap-6 lg:grid-cols-12"
+              className="grid grid-cols-1 gap-6 lg:grid-cols-12"
             >
               <div className="space-y-6 rounded-[1.5rem] border border-line bg-white p-6 sm:p-8 lg:col-span-8">
                 <div>
                   <p className="text-sm font-medium text-muted">Étape 1 sur 2</p>
                   <h2 className="mt-1 font-display text-3xl font-semibold text-ink">Les informations du voyage</h2>
                 </div>
-                <div className="grid gap-5 sm:grid-cols-2">
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <Field label="Titre du voyage (obligatoire)">
                     <input className="field" value={draft.title} required maxLength={90} onChange={(e) => update('title', e.target.value)} placeholder="Une semaine entre mer et montagne" />
                   </Field>
@@ -265,7 +265,7 @@ export default function AtelierPage() {
                         </button>
                       </div>
                     </div>
-                    <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <Field label="Ville ou lieu">
                         <input className="field" value={step.city} onChange={(e) => updateStep(step.id, 'city', e.target.value)} placeholder="Florence, Italie" />
                       </Field>
@@ -277,7 +277,7 @@ export default function AtelierPage() {
                         </select>
                       </Field>
                     </div>
-                    <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                    <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <Field label="Ce que tu as vécu">
                         <textarea className="field" rows={3} value={step.experience} onChange={(e) => updateStep(step.id, 'experience', e.target.value)} placeholder="Un moment marquant, une rencontre…" />
                       </Field>

@@ -113,7 +113,7 @@ function StepArticle({ carnet, index }: { carnet: Carnet; index: number }) {
         </span>
       </p>
 
-      <div className={`mt-6 grid gap-3 ${rest.length ? 'sm:grid-cols-3' : ''}`}>
+      <div className={`mt-6 grid grid-cols-1 gap-3 ${rest.length ? 'sm:grid-cols-3' : ''}`}>
         <TravelPhotoFrame photo={lead} className={`aspect-[16/10] rounded-[1.25rem] ${rest.length ? 'sm:col-span-2 sm:row-span-2 sm:aspect-auto sm:min-h-[22rem]' : ''}`} />
         {rest.slice(0, 2).map((photo) => (
           <TravelPhotoFrame key={photo} photo={photo} credit="short" className="aspect-[16/10] rounded-[1.25rem] sm:aspect-auto sm:min-h-[10.6rem]" />
@@ -127,7 +127,7 @@ function StepArticle({ carnet, index }: { carnet: Carnet; index: number }) {
         </div>
       )}
 
-      <div className="mt-8 grid gap-8 lg:grid-cols-12">
+      <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <p className="story-text">{step.story}</p>
           <h4 className="mt-6 font-sans text-sm font-semibold text-ink">Activités et visites</h4>
@@ -235,13 +235,22 @@ export default function CarnetDetailPage({ id }: { id: string }) {
 
       {/* Aperçu */}
       <section id="apercu" className="section-pad scroll-mt-32 bg-white" aria-labelledby="apercu-titre">
-        <div className="container-wide grid gap-12 lg:grid-cols-12">
+        <div className="container-wide grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <h2 id="apercu-titre" className="font-display text-3xl font-semibold text-ink sm:text-4xl">
               Le voyage en bref
             </h2>
-            <p className="story-text mt-5">{carnet.summary}</p>
-            <ul className="mt-6 space-y-3">
+            <ol className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-2 text-ink" aria-label="Parcours">
+              {carnet.steps.map((step, index) => (
+                <li key={step.id} className="flex items-center gap-2">
+                  {index > 0 && <ChevronRight size={16} className="text-muted" aria-hidden="true" />}
+                  <SiteLink to={`#etape-${step.id}`} className="rounded-full border border-line bg-mist px-3.5 py-1.5 text-sm font-medium hover:border-sky/40 hover:text-sky">
+                    {step.city}
+                  </SiteLink>
+                </li>
+              ))}
+            </ol>
+            <ul className="mt-8 space-y-3">
               {carnet.highlights.map((highlight) => (
                 <li key={highlight} className="flex gap-3 text-lg text-ink">
                   <span aria-hidden="true" className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-gradient-to-r from-lagoon to-violet" />
@@ -290,7 +299,7 @@ export default function CarnetDetailPage({ id }: { id: string }) {
             L’itinéraire
           </h2>
           <p className="mt-3 max-w-2xl text-ink-soft">Les étapes sont placées selon leurs coordonnées réelles. Sélectionne une étape pour la mettre en avant.</p>
-          <div className="mt-8 grid gap-6 lg:grid-cols-12">
+          <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-12">
             <div className="overflow-hidden rounded-[1.5rem] bg-night p-3 sm:p-6 lg:col-span-8">
               <div className="aspect-[8/5]">
                 <RouteMap steps={carnet.steps} activeIndex={activeStep} onSelect={setActiveStep} label={`Carte de l’itinéraire : ${carnet.steps.map((s) => s.city).join(', ')}`} />
@@ -341,7 +350,7 @@ export default function CarnetDetailPage({ id }: { id: string }) {
 
       {/* Budget */}
       <section id="budget" className="scroll-mt-32 bg-night py-16 text-white sm:py-20" aria-labelledby="budget-titre">
-        <div className="container-wide grid gap-10 lg:grid-cols-12">
+        <div className="container-wide grid grid-cols-1 gap-10 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <h2 id="budget-titre" className="font-display text-3xl font-semibold sm:text-4xl">
               Ce que le voyage a coûté
@@ -380,7 +389,7 @@ export default function CarnetDetailPage({ id }: { id: string }) {
             Hébergements, restaurants et lieux
           </h2>
           <p className="mt-3 max-w-2xl text-ink-soft">Des types d’adresses décrits par le voyageur, sans établissement mis en avant : le carnet est un exemple.</p>
-          <div className="mt-8 grid gap-8 lg:grid-cols-3">
+          <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-3">
             {(['hebergement', 'restaurant', 'lieu'] as const).map((kind) => {
               const items = allPlaces.filter(({ place }) => place.kind === kind);
               if (items.length === 0) return null;
@@ -407,7 +416,7 @@ export default function CarnetDetailPage({ id }: { id: string }) {
           <h2 id="conseils-titre" className="font-display text-3xl font-semibold text-ink sm:text-4xl">
             Les conseils de terrain
           </h2>
-          <ol className="mt-8 grid gap-4 md:grid-cols-2">
+          <ol className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
             {carnet.steps.map((step, index) => (
               <li key={step.id} className="rounded-[var(--radius-card)] border border-line p-5">
                 <p className="flex items-center gap-2 text-xs font-medium text-muted">
@@ -457,7 +466,7 @@ export default function CarnetDetailPage({ id }: { id: string }) {
           {moreFromAuthor.length > 0 && author && (
             <>
               <h2 className="font-display text-3xl font-semibold text-ink">Les autres carnets de {author.name}</h2>
-              <div className="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {moreFromAuthor.map((other) => (
                   <CarnetCard key={other.id} carnet={other} />
                 ))}
@@ -467,7 +476,7 @@ export default function CarnetDetailPage({ id }: { id: string }) {
           <h2 id="suite-titre" className="mt-16 font-display text-3xl font-semibold text-ink">
             Des carnets proches
           </h2>
-          <div className="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {similarCarnets(carnet).map((other) => (
               <CarnetCard key={other.id} carnet={other} />
             ))}

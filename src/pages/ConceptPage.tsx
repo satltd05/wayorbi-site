@@ -48,7 +48,7 @@ export default function ConceptPage() {
       />
 
       <section className="section-pad bg-white" aria-labelledby="constat-titre">
-        <div className="container-wide grid gap-12 lg:grid-cols-12">
+        <div className="container-wide grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <h2 id="constat-titre" className="font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
               Préparer un voyage, c’est jongler entre cinq outils
@@ -76,7 +76,7 @@ export default function ConceptPage() {
       <section className="section-pad bg-mist" aria-labelledby="parcours-titre">
         <div className="container-wide">
           <SectionHeading id="parcours-titre" title="Un compagnon pour tout le voyage" description="Le carnet accompagne chaque moment, de l’envie de partir au partage du retour." />
-          <ol className="grid gap-6 lg:grid-cols-3">
+          <ol className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             {PHASES.map((phase, index) => (
               <li key={phase.title} className="overflow-hidden rounded-[1.5rem] border border-line bg-white">
                 <TravelPhotoFrame photo={phase.photo} credit="short" creditPosition="bottom" className="aspect-[16/10]" />
@@ -94,7 +94,7 @@ export default function ConceptPage() {
       <section className="section-pad bg-white" aria-labelledby="piliers-titre">
         <div className="container-wide">
           <SectionHeading id="piliers-titre" title="Un réseau social construit autour du voyage vécu" description="Chaque pilier du concept a sa démonstration sur ce site." />
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
             {PILLARS.map((pillar) => (
               <FeatureCard
                 key={pillar.title}
@@ -113,7 +113,7 @@ export default function ConceptPage() {
       </section>
 
       <section className="section-pad bg-mist" aria-labelledby="nom-titre">
-        <div className="container-wide grid items-center gap-12 lg:grid-cols-2">
+        <div className="container-wide grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <div>
             <h2 id="nom-titre" className="font-display text-3xl font-semibold text-ink sm:text-4xl">
               Way + Orbis

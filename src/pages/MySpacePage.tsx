@@ -91,7 +91,7 @@ export default function MySpacePage() {
                   Aucun carnet enregistré. Utilise le signet sur une photo de carnet pour le retrouver ici.
                 </Empty>
               ) : (
-                <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
                   {saved.map((carnet) => (
                     <CarnetCard key={carnet.id} carnet={carnet} />
                   ))}
@@ -100,7 +100,7 @@ export default function MySpacePage() {
             </div>
           </div>
 
-          <div className="grid gap-12 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             <div>
               <h2 className="font-display text-2xl font-semibold text-ink">Carnets que j’aime</h2>
               <div className="mt-5">
@@ -139,7 +139,7 @@ export default function MySpacePage() {
             </div>
           </div>
 
-          <div className="grid gap-12 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             <div>
               <h2 className="flex items-center gap-2 font-display text-2xl font-semibold text-ink">
                 <Sparkles size={20} className="text-violet" aria-hidden="true" /> Mon Travel DNA

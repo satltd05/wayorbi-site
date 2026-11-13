@@ -32,7 +32,7 @@ function FeedPost({ carnet }: { carnet: Carnet }) {
           a publié un carnet · {carnet.country}
         </p>
       </header>
-      <SiteLink to={`/carnets/${carnet.id}`} className="group relative block aspect-[16/9] overflow-hidden" aria-label={`Lire le carnet ${carnet.title}`}>
+      <SiteLink to={`/carnets/${carnet.id}`} className="group relative block aspect-[2/1] overflow-hidden" aria-label={`Lire le carnet ${carnet.title}`}>
         <img src={cover.src} alt={cover.alt} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
         <span className="absolute bottom-2 right-3 text-[10px] text-white/90 [text-shadow:0_1px_2px_rgba(0,0,0,.6)]">{photoCredit(cover)}</span>
       </SiteLink>
@@ -83,7 +83,7 @@ export default function FeedSection() {
           <DemoTag>Données fictives, interactions gardées dans ce navigateur</DemoTag>
         </div>
 
-        <div className="grid items-start gap-8 lg:grid-cols-12">
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
           <div className="space-y-6 lg:col-span-8">
             <div className="rounded-[1.5rem] border border-line bg-white p-4 sm:p-5">
               <StoriesRow />

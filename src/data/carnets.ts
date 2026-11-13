@@ -79,7 +79,7 @@ export const CARNETS: Carnet[] = [
     cover: 'japon-cover',
     summary:
       'Douze jours en train et en bus entre la capitale, les villes-châteaux des Alpes japonaises et Kyoto, avec une nuit dans une ferme au toit de chaume.',
-    period: 'Printemps (fin avril)',
+    period: 'Automne (fin octobre)',
     travelers: 2,
     companion: 'Duo',
     tripType: 'Découverte & tourisme',
@@ -146,7 +146,7 @@ export const CARNETS: Carnet[] = [
           { kind: 'hebergement', name: 'Minshuku dans une ferme au toit de chaume', note: 'Dîner et petit-déjeuner servis autour du foyer.' },
           { kind: 'restaurant', name: 'Stand de bœuf de Hida', note: 'Brochettes et sushis de bœuf grillé dans la vieille ville.', photo: 'food-hida' },
         ],
-        tip: { title: 'Réserver le bus pour Shirakawa-gō', detail: 'Les places Takayama – Shirakawa-gō partent vite au printemps : réserver dès que les dates sont fixées.' },
+        tip: { title: 'Réserver le bus pour Shirakawa-gō', detail: 'Les places Takayama – Shirakawa-gō partent vite en automne, pendant les couleurs : réserver dès que les dates sont fixées.' },
         budget: { hebergement: 240, transport: 85, restauration: 95, activites: 30, autres: 10 },
         photos: ['takayama-1', 'japon-cover', 'takayama-2', 'takayama-3'],
       },
@@ -173,7 +173,7 @@ export const CARNETS: Carnet[] = [
     ],
     comments: [
       { authorId: 'emma', text: 'Le marché du matin à Takayama me donne très envie. Le minshuku se réserve combien de temps à l’avance ?' },
-      { authorId: 'hugo', text: 'Nous avions réservé environ deux mois avant : au printemps, les places partent vite.' },
+      { authorId: 'hugo', text: 'Nous avions réservé environ deux mois avant : en automne, les places partent vite.' },
     ],
   },
   {

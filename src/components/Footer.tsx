@@ -15,7 +15,7 @@ export default function Footer() {
     <footer className="relative overflow-hidden bg-night text-white/75">
       <div aria-hidden="true" className="absolute -right-32 -top-48 h-[34rem] w-[34rem] rounded-full bg-indigo/20 blur-[120px]" />
       <div className="container-wide relative py-16">
-        <div className="grid gap-10 lg:grid-cols-12">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           <div className="space-y-5 lg:col-span-4">
             <SiteLink to="/" className="inline-flex items-center gap-2.5">
               <img src="/logo-wayorbi.png" alt="" width={36} height={36} className="h-9 w-9 rounded-xl" />

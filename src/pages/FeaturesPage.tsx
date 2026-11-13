@@ -69,13 +69,13 @@ export default function FeaturesPage() {
           </ul>
           <div className="space-y-8">
             {SECTIONS.map((section) => (
-              <article key={section.title} className="grid gap-8 rounded-[1.5rem] border border-line p-6 sm:p-8 lg:grid-cols-12">
+              <article key={section.title} className="grid grid-cols-1 gap-8 rounded-[1.5rem] border border-line p-6 sm:p-8 lg:grid-cols-12">
                 <div className="lg:col-span-4">
                   <span className="grid h-11 w-11 place-items-center rounded-2xl bg-sky/10 text-sky">{section.icon}</span>
                   <h3 className="mt-4 font-display text-3xl font-semibold text-ink">{section.title}</h3>
                   <p className="mt-2 text-ink-soft">{section.intro}</p>
                 </div>
-                <ul className="grid gap-4 sm:grid-cols-2 lg:col-span-8">
+                <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-8">
                   {section.features.map((feature) => (
                     <li key={feature.title} className="rounded-2xl bg-mist p-4">
                       <p className="font-semibold text-ink">{feature.title}</p>

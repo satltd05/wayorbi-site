@@ -42,7 +42,7 @@ export function PageHero({
             'radial-gradient(56rem 28rem at 92% -8%, rgba(140,111,230,0.16), transparent 62%), radial-gradient(48rem 26rem at -8% -4%, rgba(31,184,222,0.16), transparent 60%)',
         }}
       />
-      <div className={`container-wide relative grid items-center gap-10 ${photos ? 'lg:grid-cols-12' : ''}`}>
+      <div className={`container-wide relative grid grid-cols-1 items-center gap-10 ${photos ? 'lg:grid-cols-12' : ''}`}>
         <div className={photos ? 'lg:col-span-6' : 'max-w-3xl'}>
           {kicker && <p className="text-sm font-medium text-sky">{kicker}</p>}
           <h1 className="mt-3 font-display text-[2.5rem] font-semibold leading-[1.05] text-ink sm:text-5xl lg:text-[3.6rem]">{title}</h1>

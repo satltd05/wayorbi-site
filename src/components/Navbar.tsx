@@ -90,7 +90,7 @@ export default function Navbar({ currentPath = '/' }: { currentPath?: string }) 
 
       {open && (
         <nav id="menu-mobile" aria-label="Menu" className="max-h-[calc(100vh-72px)] overflow-y-auto border-t border-line bg-white px-4 py-4 xl:hidden">
-          <ul className="grid gap-1 sm:grid-cols-2">
+          <ul className="grid grid-cols-1 gap-1 sm:grid-cols-2">
             {[...NAV_LINKS, { href: '/atelier', label: 'Atelier carnet', match: ['/atelier'] }, { href: '/faq', label: 'Questions fréquentes', match: ['/faq'] }].map((link) => (
               <li key={link.href}>
                 <SiteLink

@@ -66,7 +66,7 @@ export default function HeroSection() {
             'radial-gradient(42rem 30rem at 78% 30%, rgba(61,123,242,0.20), transparent 65%), radial-gradient(36rem 26rem at 95% 85%, rgba(140,111,230,0.20), transparent 65%), radial-gradient(40rem 26rem at 0% 0%, rgba(31,184,222,0.16), transparent 60%)',
         }}
       />
-      <div className="container-wide relative grid items-center gap-12 lg:grid-cols-12">
+      <div className="container-wide relative grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}

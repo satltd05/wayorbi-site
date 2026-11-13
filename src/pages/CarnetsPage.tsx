@@ -54,7 +54,7 @@ export default function CarnetsPage() {
               <CarnetCard carnet={featured} variant="feature" />
             </div>
           )}
-          <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {list.map((carnet) => (
               <CarnetCard key={carnet.id} carnet={carnet} />
             ))}
@@ -72,7 +72,7 @@ export default function CarnetsPage() {
             title="Créer un carnet en deux temps"
             description="Le carnet se construit en deux étapes : d’abord le cadre du voyage, ensuite le récit, étape par étape. Un brouillon peut être repris plus tard."
           />
-          <ol className="grid gap-6 md:grid-cols-2">
+          <ol className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {[
               {
                 icon: <BookOpen size={22} aria-hidden="true" />,

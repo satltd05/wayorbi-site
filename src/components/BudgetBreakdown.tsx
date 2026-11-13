@@ -43,7 +43,7 @@ export default function BudgetBreakdown({
         ))}
       </div>
 
-      <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+      <ul className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
         {EXPENSE_CATEGORIES.map(({ key, label, color }) => (
           <li key={key} className={`flex items-center justify-between gap-3 text-sm ${dark ? 'text-white/85' : 'text-ink-soft'}`}>
             <span className="flex items-center gap-2">

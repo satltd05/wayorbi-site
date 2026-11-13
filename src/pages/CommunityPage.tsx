@@ -64,7 +64,7 @@ export default function CommunityPage() {
                 : 'Chacun a son style : train, randonnée, gastronomie, bains chauds… Suis ceux qui t’inspirent.'
             }
           />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {TRAVELERS.map((traveler) => (
               <TravelerCard key={traveler.id} traveler={traveler} />
             ))}
@@ -76,7 +76,7 @@ export default function CommunityPage() {
       <section className="section-pad bg-mist" aria-labelledby="echanges-titre">
         <div className="container-wide">
           <SectionHeading id="echanges-titre" title="Échanger, en gardant le contrôle" description="Messages privés, groupes de voyage et choix de visibilité du profil font partie du concept." />
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <div className="rounded-[1.5rem] border border-line bg-white p-6 sm:p-7">
               <div className="flex items-center justify-between gap-3">
                 <h3 className="font-display text-xl font-semibold text-ink">Aperçu de la messagerie</h3>
@@ -142,7 +142,7 @@ export default function CommunityPage() {
       <section className="section-pad bg-white" aria-labelledby="formats-titre">
         <div className="container-wide">
           <SectionHeading id="formats-titre" title="Ce que la communauté pourra faire" description="Certaines fonctions sont déjà démontrées sur ce site ; d’autres viendront avec l’application." />
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {FORMATS.map((format) => (
               <FeatureCard
                 key={format.title}

@@ -1,0 +1,46 @@
+# --- Dépendances et fichiers générés ---
+node_modules/
+dist/
+dist-ssr/
+coverage/
+.cache/
+*.local
+*.tsbuildinfo
+
+# --- Variables d'environnement et secrets : ne jamais les publier ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# --- Journaux ---
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Systèmes d'exploitation et éditeurs ---
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# --- Garde-fou : documents personnels ou bureautiques ---
+# Ces formats n'ont pas leur place dans le dépôt public du site.
+# Pour publier volontairement un fichier de ce type, ajoute une exception, par ex. :
+#   !public/brochure-wayorbi.pdf
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+*.zip
+*.rar
+*.7z

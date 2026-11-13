@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer base {
+  html { scroll-padding-top: 88px; }
+  body { background: #F2F5F9; color: #17233F; }
+  button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 3px solid #7294ff; outline-offset: 3px; }
+}
+@layer components {
+ .container-wide { width:100%; max-width:80rem; margin-inline:auto; padding-inline:1rem; }
+ .section-pad { padding-block:5rem; }
+ .gradient-text { background:linear-gradient(100deg,#3284EA 0%,#4D73E7 48%,#9760E3 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+ .btn-primary, .btn-secondary { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; padding:.875rem 1.5rem; border-radius:.75rem; font-size:.875rem; font-weight:700; min-height:2.75rem; transition:all .2s ease; text-decoration:none; }
+ .btn-primary { background:linear-gradient(90deg,#2964E5,#7752DD); color:white; box-shadow:0 8px 24px rgba(55,96,220,.2); }
+ .btn-primary:hover { filter:brightness(1.1); }
+ .btn-secondary { border:1px solid #D7E1F1; background:white; color:#3757B7; }
+ .btn-secondary:hover { background:#F5F8FF; }
+ .pill { display:inline-flex; align-items:center; padding:.375rem .75rem; border-radius:999px; font-size:.75rem; font-weight:600; color:#5969A1; background:#EDF2FC; border:1px solid #E2E9F7; }
+ .skip-link { position:fixed; top:-100px; left:10px; z-index:100; background:white; color:#203FC1; padding:12px 20px; border-radius:12px; }
+ .skip-link:focus { top:10px; }
+ @media(min-width:640px) { .container-wide { padding-inline:1.5rem; } .section-pad { padding-block:6rem; } }
+ @media(min-width:1024px) { .container-wide { padding-inline:2rem; } .section-pad { padding-block:7rem; } }
+}
